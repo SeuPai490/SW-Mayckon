@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Preço de Vinho</title>
+</head>
+<body>
+    <form action="" method="post">
+        Nome:<input type="text" name="nome" id="nome"><br>
+        Tipo: <input type="text" name="tipo" id="tipo"><br>
+        Preço: <input type="text" name="preco" id="preco" required><br>
+        Safra: <input type="text" name="safra" id="safra"><br>
+        <input type="submit" name="btn" id="btn" value="Enviar">
+    </form>
+    
+</body>
+</html>
+<?php 
+require_once "vinho.php";
+$mensagem = '';
+$nome=$_POST['nome'];
+$tipo=$_POST['tipo'];
+$preco=$_POST['preco'];
+$safra=$_POST['safra'];
+
+
+$obj=new vinho(); 
+$obj->setNome($nome);
+$obj->setTipo($tipo);
+$obj->setPreco($preco);
+$obj->setSafra($safra);
+
+if (isset($_POST['btn'])) {
+    if ($obj->verificarPreco($_POST["preco"]) == true) {
+        echo $mensagem = "Produto em Oferta";
+    } else {
+        echo $mensagem = "Produto com o preço normal";
+    }
+}
+
+?>
